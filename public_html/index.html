@@ -24,7 +24,8 @@ and open the template in the editor.
                         <div class="row">
                             <label for="vlrParcIn" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Vlr Parc.:</label>
 
-                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                <span class="input-group-addon">R$</span>
                                 <input id="vlrParcIn" autofocus
                                        type="number" class="form-control" 
                                        ng-change="cpVlrParc()" ng-model="contrato.vlrParc" />                        
@@ -38,7 +39,8 @@ and open the template in the editor.
                     <div class="form-inline">
                         <div class="row">
                             <label for="vlrHonIn" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Honorarios.:</label>
-                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                <span class="input-group-addon">R$</span>
                                 <input id="vlrHonIn" 
                                        type="number" class="form-control col-lg-6"
                                        ng-change="cpVlrHon()" ng-model="contrato.vlrHon" disabled/>
@@ -58,7 +60,8 @@ and open the template in the editor.
                             <div class="row">
                                 <label for="inParc1" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">1ª</label> 
 
-                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                    <span class="input-group-addon">R$</span>
                                     <input id="inParc1"
                                            type="number" class="form-control sm-8"
                                            ng-change="cpVlrJuroParc1()" ng-model="contrato.vlrJuroParc1" />
@@ -71,7 +74,8 @@ and open the template in the editor.
                         <div class="form-inline">
                             <div class="row">
                                 <label for="inParc2" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">2ª</label> 
-                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                    <span class="input-group-addon">R$</span>
                                     <input id="inParc2" 
                                            type="number" class="form-control sm-8"
                                            ng-change="cpVlrJuroParc2()" ng-model="contrato.vlrJuroParc2" />
@@ -84,7 +88,8 @@ and open the template in the editor.
                         <div class="form-inline">
                             <div class="row">
                                 <label for="inParc3" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">3ª</label> 
-                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                    <span class="input-group-addon">R$</span>
                                     <input id="inParc3" 
                                            type="number" class="form-control"
                                            ng-change="cpVlrJuroParc3()" ng-model="contrato.vlrJuroParc3" />                    
@@ -97,7 +102,8 @@ and open the template in the editor.
                         <div class="form-inline">
                             <div class="row">
                                 <label for="inPercDesc" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Desconto.:</label>
-                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                    <span class="input-group-addon">%</span>
                                     <input id="inPercDesc" 
                                            type="number"  class="form-control"
                                            ng-change="cpVlrDescJuros()" ng-model="contrato.vlrDescJuros"/>
@@ -111,7 +117,8 @@ and open the template in the editor.
                         <div class="row">
                             <div class="form-inline">
                                 <label for="inGCA" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">GCA</label>
-                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 input-group">
+                                    <span class="input-group-addon">R$</span>
                                     <input id="inGCA" 
                                            type="number" class="form-control"
                                            ng-change="cpVlrGCA()" ng-model="contrato.vlrGCA" />
