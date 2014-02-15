@@ -8,57 +8,139 @@ and open the template in the editor.
     <head>
         <title>Calculadora</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale-1" >
+
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap-theme.css">
     </head>
-    <body ng-controller="cobCalc">
+    <body ng-controller="cobCalc" class="container">
         <div>
 
 
-            <form ng-controller="dadosContrato">
-                <label>Valor Parcela.:</label>
-                <input type="number" ng-change="cpVlrParc()" ng-model="contrato.vlrParc" />
+            <form ng-controller="dadosContrato" role="form" class="form-horizontal">
 
-                <br/>
-                
-                <label>Honorarios.:</label>
-                <input type="number" ng-change="cpVlrHon()" ng-model="contrato.vlrHon" disabled/>
-                
-                <br/>
-                
-                <div>
-                    <span>Juros</span>
-                    
-                    <br/>
-                    
-                    <label>1ª</label> <input type="number" ng-change="cpVlrJuroParc1()" ng-model="contrato.vlrJuroParc1" />
-                    <br />
-                    <label>2ª</label> <input type="number" ng-change="cpVlrJuroParc2()" ng-model="contrato.vlrJuroParc2" />
-                    <br />
-                    <label>3ª</label> <input type="number" ng-change="cpVlrJuroParc3()" ng-model="contrato.vlrJuroParc3" />                    
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="row">
+                            <label for="vlrParcIn" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Vlr Parc.:</label>
+
+                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <input id="vlrParcIn" autofocus
+                                       type="number" class="form-control" 
+                                       ng-change="cpVlrParc()" ng-model="contrato.vlrParc" />                        
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <br />
-                
-                <label>Desconto.:</label>
-                <input type="number"  ng-change="cpVlrDescJuros()" ng-model="contrato.vlrDescJuros"/>
-                
-                <br />
-                
-                <label>GCA</label><input type="number" ng-change="cpVlrGCA()" ng-model="contrato.vlrGCA" />
-                
-                <br />
-                
-                <label>Quantidade de Parcela.:</label>            
-                <select name="qntParcelas" ng-change="cpQntParc()" ng-model="contrato.qntParc">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                
-                <br />
-                
-                <p>Sem Desconto.: <span>{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
-                <p>Com Desconto.: <span>{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
+
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="row">
+                            <label for="vlrHonIn" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Honorarios.:</label>
+                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                <input id="vlrHonIn" 
+                                       type="number" class="form-control col-lg-6"
+                                       ng-change="cpVlrHon()" ng-model="contrato.vlrHon" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Juros</label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="row">
+                                <label for="inParc1" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">1ª</label> 
+
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input id="inParc1"
+                                           type="number" class="form-control sm-8"
+                                           ng-change="cpVlrJuroParc1()" ng-model="contrato.vlrJuroParc1" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="row">
+                                <label for="inParc2" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">2ª</label> 
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input id="inParc2" 
+                                           type="number" class="form-control sm-8"
+                                           ng-change="cpVlrJuroParc2()" ng-model="contrato.vlrJuroParc2" />
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="row">
+                                <label for="inParc3" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">3ª</label> 
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input id="inParc3" 
+                                           type="number" class="form-control"
+                                           ng-change="cpVlrJuroParc3()" ng-model="contrato.vlrJuroParc3" />                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="row">
+                                <label for="inPercDesc" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">Desconto.:</label>
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input id="inPercDesc" 
+                                           type="number"  class="form-control"
+                                           ng-change="cpVlrDescJuros()" ng-model="contrato.vlrDescJuros"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="form-inline">
+                                <label for="inGCA" class="col-xs-4 col-lg-2 col-md-2 col-sm-4 text-right">GCA</label>
+                                <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input id="inGCA" 
+                                           type="number" class="form-control"
+                                           ng-change="cpVlrGCA()" ng-model="contrato.vlrGCA" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="row">
+                                <label for="inQntParc" class="col-xs-8 col-lg-2 col-md-2 col-sm-8 text-right">Quantidade de Parcela.:</label>            
+                                <div class="col-xs-2 col-lg-6 col-md-6 col-sm-2">
+                                    <select name="qntParcelas" id="inQntParc"
+                                            class="form-control"
+                                            ng-change="cpQntParc()" ng-model="contrato.qntParc">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <p>Sem Desconto.: <span>{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
+                    <p>Com Desconto.: <span>{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
             </form>
 
 
@@ -69,108 +151,109 @@ and open the template in the editor.
         <script type="text/javascript" src="js/libs/angular.js/angular-resource.js"></script>
         <script type="text/javascript">
 
-                        function dadosContrato($scope) {
-                            $scope.contrato = {
-                                vlrTotalParc: 0,
-                                vlrParc: 0,
-                                vlrHon: 0,
-                                qntParc: 0,
-                                vlrGCA: 0,
-                                vlrDescJuros: 0,
-                                vlrJuroParc1: 0,
-                                vlrJuroParc2: 0,
-                                vlrJuroParc3: 0
-                            };
+                    function dadosContrato($scope) {
+                        $scope.contrato = {
+                            vlrTotalParc: 0,
+                            vlrParc: 0,
+                            vlrHon: 0,
+                            qntParc: 0,
+                            vlrGCA: 0,
+                            vlrDescJuros: 0,
+                            vlrJuroParc1: 0,
+                            vlrJuroParc2: 0,
+                            vlrJuroParc3: 0
+                        };
 
-                            var cpVlrParc = function() {
-                                $scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
+                        var cpVlrParc = function() {
+                            $scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
 
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
 
-                            };
+                        };
 
-                            var cpVlrHon = function() {
-                            
-                            };
+                        var cpVlrHon = function() {
 
-                            var cpQntParc = function() {
-                                $scope.contrato.vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
+                        };
 
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
+                        var cpQntParc = function() {
+                            $scope.contrato.vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
 
-
-                            var cpVlrGCA = function() {
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
-                            var cpVlrDescJuros = function() {
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
-
-                            var cpVlrJuroParc1 = function() {
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
-                            var cpVlrJuroParc2 = function() {
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
-                            var cpVlrJuroParc3 = function() {
-                                $scope.contrato.totalSemDesconto = parcSemDesc();
-                                $scope.contrato.totalComDesconto = parcComDesc();
-                            };
-                                                        
-                            function parcSemDesc() {
-                                somaSemJuro =
-                                        (($scope.contrato.vlrParc * $scope.contrato.qntParc)
-                                                + $scope.contrato.vlrHon)
-                                        + $scope.contrato.vlrGCA;
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
 
 
-                                parc = $scope.contrato.qntParc;
-                                if (parc == 1) {
-                                    return somaSemJuro + $scope.contrato.vlrJuroParc1;
-                                } else if (parc == 2) {
-                                    return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
-                                } else if (parc == 3) {
-                                    return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + +$scope.contrato.vlrJuroParc3;
+                        var cpVlrGCA = function() {
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
+                        var cpVlrDescJuros = function() {
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
 
-                                }
-                            }
-                            ;
+                        var cpVlrJuroParc1 = function() {
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
+                        var cpVlrJuroParc2 = function() {
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
+                        var cpVlrJuroParc3 = function() {
+                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                            $scope.contrato.totalComDesconto = parcComDesc();
+                        };
 
-                            function parcComDesc() {
-                                somaVlrEstaveis = (($scope.contrato.vlrParc * $scope.contrato.qntParc)
-                                        + $scope.contrato.vlrHon)
-                                        + $scope.contrato.vlrGCA;
+                        function parcSemDesc() {
+                            somaSemJuro =
+                                    (($scope.contrato.vlrParc * $scope.contrato.qntParc)
+                                            + $scope.contrato.vlrHon)
+                                    + $scope.contrato.vlrGCA;
 
-                                if (parc == 1) {
-                                    
-                                    juroComDesc = ($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros)/100;                                    
-                                    return (somaVlrEstaveis+$scope.contrato.vlrJuroParc1) - juroComDesc;
-                                } else if (parc == 2) {
-                                    juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) * $scope.contrato.vlrDescJuros) / 100;
-                                    return (somaVlrEstaveis+$scope.contrato.vlrJuroParc1 +$scope.contrato.vlrJuroParc2) - juroComDesc;
-                                } else if (parc == 3) {
-                                    juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) * $scope.contrato.vlrDescJuros) / 100;
-                                    return (somaVlrEstaveis+$scope.contrato.vlrJuroParc1 +$scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) - juroComDesc;
 
-                                };
-
+                            parc = $scope.contrato.qntParc;
+                            if (parc == 1) {
+                                return somaSemJuro + $scope.contrato.vlrJuroParc1;
+                            } else if (parc == 2) {
+                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
+                            } else if (parc == 3) {
+                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + +$scope.contrato.vlrJuroParc3;
 
                             }
-                            $scope.$watch('contrato.vlrParc', cpVlrParc);
-                            $scope.$watch('contrato.vlrHon', cpVlrHon);
-                            $scope.$watch('contrato.qntParc', cpQntParc);
                         }
                         ;
 
-                        function cobCalc($scope) {
-                            // $scope.totalSemDesconto = "test";
+                        function parcComDesc() {
+                            somaVlrEstaveis = (($scope.contrato.vlrParc * $scope.contrato.qntParc)
+                                    + $scope.contrato.vlrHon)
+                                    + $scope.contrato.vlrGCA;
+
+                            if (parc == 1) {
+
+                                juroComDesc = ($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100;
+                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1) - juroComDesc;
+                            } else if (parc == 2) {
+                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) * $scope.contrato.vlrDescJuros) / 100;
+                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) - juroComDesc;
+                            } else if (parc == 3) {
+                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) * $scope.contrato.vlrDescJuros) / 100;
+                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) - juroComDesc;
+
+                            }
+                            ;
+
+
                         }
+                        $scope.$watch('contrato.vlrParc', cpVlrParc);
+                        $scope.$watch('contrato.vlrHon', cpVlrHon);
+                        $scope.$watch('contrato.qntParc', cpQntParc);
+                    }
+                    ;
+
+                    function cobCalc($scope) {
+                        // $scope.totalSemDesconto = "test";
+                    }
 
 
         </script>
