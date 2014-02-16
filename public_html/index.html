@@ -11,7 +11,29 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale-1" >
 
         <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap-theme.css">                
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap-theme.css"> 
+
+        <style type="text/css">
+            .acordoSemDesc{
+                border: solid 2px #245b18;
+
+            }
+
+            .acordoComDesc{
+                border: solid 2px #c40402;
+            }
+            
+            .acordoSemDesc span {
+                color: #144612;
+                font-style: italic;
+                margin-left: 5px;
+            }
+            
+            .acordoComDesc span {
+                font-style: italic;
+                margin-left: 5px;
+            }
+        </style>
     </head>
     <body ng-controller="cobCalc" class="container">
         <div>
@@ -51,7 +73,7 @@ and open the template in the editor.
 
 
                 <div class="form-group">
-                    
+
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -141,26 +163,38 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
+                    <!-- Tirado os botoes por nao estar interagindo com angularJS o metodo ng-click
+                                        <div class="row">
+                                            <div class='form-inline'>                        
+                    <!--
+                    <a href="#" class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1">Gerar Texto</a>                                                                    
+                        
+                        <button class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1 btn btn-primary" ng-click="limparDados()" value="TTT">Gerar Texto</button>                                                                    
+                    <a href="#" id="limparDados" 
+                       class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-1 col-md-2 col-lg-1 col-lg-offset-1"
+                       ng-click="limparDados()" >Limpar</a                        
+                    </div>
+                </div>
+                    -->
+                    <div class="row">
+                        <p class="col-xs-offset-1 text-info">Sem Desconto.: <span class="text-success">{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
+                        <p class="col-xs-offset-1 text-info">Com Desconto.: <span class="text-warning">{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
+                    </div>
 
                     <div class="row">
-                        <div class='form-inline'>
-                        
-                        <a href="#" class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1">Gerar Texto</a>                                                                    
-                        <a href="#" 
-                           class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-1 col-md-2 col-lg-1 col-lg-offset-1"
-                           ng-click="limparDados()" >Limpar</a>
-                        
+
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-8 acordoSemDesc">
+                            <span class="text-success">Acordo sem Desconto.:</span>
+                            <p class="col-xs-offset-1 text-success">{{contrato.textoSemDesc}}</p>
                         </div>
                     </div>
-
-                    <div class="row">
-                    <p class="col-xs-offset-1">Sem Desconto.: <span>{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
-                    <p class="col-xs-offset-1">Com Desconto.: <span>{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
-                    </div>
-                    
-                    <div class="row">
-                        <p class="col-xs-offset-1">{{contrato.textoSemDesc}}</p>
-                        <p class="col-xs-offset-1">{{contrato.textoComDesc}}</p>
+                        <br/>
+                        <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-8 acordoComDesc"> 
+                            <span class="text-danger">Acordo com Desconto.:</span>
+                            <p class="col-xs-offset-1 text-warning">{{contrato.textoComDesc}}</p>
+                        </div>
+                        </div>
                     </div>
             </form>
 
@@ -172,198 +206,216 @@ and open the template in the editor.
         <script type="text/javascript" src="js/libs/angular.js/angular-resource.js"></script>
         <script type="text/javascript">
 
-                    function dadosContrato($scope) {
-                        $scope.contrato = {
-                            vlrTotalParc: 0,
-                            vlrParc: 0,
-                            vlrHon: 0,
-                            qntParc: 0,
-                            vlrGCA: 0,
-                            vlrDescJuros: 0,
-                            vlrJuroParc1: 0,
-                            vlrJuroParc2: 0,
-                            vlrJuroParc3: 0
-                        };
+                                    function dadosContrato($scope) {
+                                        $scope.contrato = {
+                                            vlrTotalParc: 0,
+                                            vlrParc: 0,
+                                            vlrHon: 0,
+                                            qntParc: 0,
+                                            vlrGCA: 0,
+                                            vlrDescJuros: 0,
+                                            vlrJuroParc1: 0,
+                                            vlrJuroParc2: 0,
+                                            vlrJuroParc3: 0
+                                        };
 
-                        var cpVlrParc = function() {
-                            $scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
+                                        var cpVlrParc = function() {
+                                            $scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
 
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
 
-                        };
+                                        };
 
-                        var cpVlrHon = function() {
+                                        var cpVlrHon = function() {
 
-                        };
+                                        };
 
-                        var cpQntParc = function() {
-                            $scope.contrato.vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
+                                        var cpQntParc = function() {
+                                            $scope.contrato.vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
 
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                            
-                            $scope.contrato.textoSemDesc = textoParcSemDesc();
-                            $scope.contrato.textoComDesc = textoParcComDesc();
-                        };
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
 
-
-                        var cpVlrGCA = function() {
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                        };
-                        var cpVlrDescJuros = function() {
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                        };
-
-                        var cpVlrJuroParc1 = function() {
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                        };
-                        var cpVlrJuroParc2 = function() {
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                        };
-                        var cpVlrJuroParc3 = function() {
-                            $scope.contrato.totalSemDesconto = parcSemDesc();
-                            $scope.contrato.totalComDesconto = parcComDesc();
-                        };
-
-                        function parcSemDesc() {
-                            somaSemJuro =
-                                    (($scope.contrato.vlrParc * $scope.contrato.qntParc)
-                                            + $scope.contrato.vlrHon)
-                                    + $scope.contrato.vlrGCA;
+                                            $scope.contrato.textoSemDesc = textoParcSemDesc();
+                                            $scope.contrato.textoComDesc = textoParcComDesc();
+                                        };
 
 
-                            parc = $scope.contrato.qntParc;
-                            if (parc == 1) {
-                                return somaSemJuro + $scope.contrato.vlrJuroParc1;
-                            } else if (parc == 2) {
-                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
-                            } else if (parc == 3) {
-                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + +$scope.contrato.vlrJuroParc3;
+                                        var cpVlrGCA = function() {
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
+                                        };
+                                        var cpVlrDescJuros = function() {
+                                            $scope.contrato.totalComDesconto = parcComDesc();
+                                        };
 
-                            }
-                        }
-                        ;
+                                        var cpVlrJuroParc1 = function() {
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
+                                        };
+                                        var cpVlrJuroParc2 = function() {
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
+                                        };
+                                        var cpVlrJuroParc3 = function() {
+                                            $scope.contrato.totalSemDesconto = parcSemDesc();
+                                            $scope.contrato.totalComDesconto = parcComDesc();
+                                        };
 
-                        function parcComDesc() {
-                            somaVlrEstaveis = (($scope.contrato.vlrParc * $scope.contrato.qntParc)
-                                    + $scope.contrato.vlrHon)
-                                    + $scope.contrato.vlrGCA;
+                                        function parcSemDesc() {
+                                            somaSemJuro =
+                                                    (($scope.contrato.vlrParc * $scope.contrato.qntParc)
+                                                            + $scope.contrato.vlrHon)
+                                                    + $scope.contrato.vlrGCA;
 
-                            if (parc == 1) {
 
-                                juroComDesc = ($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100;
-                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1) - juroComDesc;
-                            } else if (parc == 2) {
-                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) * $scope.contrato.vlrDescJuros) / 100;
-                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) - juroComDesc;
-                            } else if (parc == 3) {
-                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) * $scope.contrato.vlrDescJuros) / 100;
-                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) - juroComDesc;
+                                            parc = $scope.contrato.qntParc;
+                                            if (parc == 1) {
+                                                return somaSemJuro + $scope.contrato.vlrJuroParc1;
+                                            } else if (parc == 2) {
+                                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
+                                            } else if (parc == 3) {
+                                                return somaSemJuro + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + +$scope.contrato.vlrJuroParc3;
 
-                            };                                                        
-                        };
-                        
-                        function textoParcSemDesc(){
-                            texto = "Vlr Acordo.: ";
-                            cifrao = " R$ ";
-                            vlrAcordo = $scope.contrato.totalSemDesconto;
-                            textoHon = " Hon.: ";                                                        
-                            vlrHon = $scope.contrato.vlrHon;
-                            textoJuros = " Juros.: ";
-                            textoDesc = " Desc.: ";
-                            vlrDesc = " S/D";
-                            vlrJuros = "";
-                            
-                            if($scope.contrato.qntParc == 1){
-                                vlrJuros = $scope.contrato.vlrJuroParc1;
-                            } else if($scope.contrato.qntParc == 2){
-                                vlrJuros = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
-                            } else if($scope.contrato.qntParc == 3){
-                                vlrJuros = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3;}
-                            
-                            textoGCA = " GCA.: ";
-                            vlrGCA = $scope.contrato.vlrGCA;
-                            
-                            qntDeParc = "";
-                            
-                            if($scope.contrato.qntParc == 1){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
-                            } else if($scope.contrato.qntParc == 2){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
-                            } else if($scope.contrato.qntParc == 3){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";}
-                            
-                            
-                            return texto + cifrao +  vlrAcordo 
-                                    + textoHon + cifrao + vlrHon 
-                                    + textoJuros + cifrao + vlrJuros  
-                                    + textoDesc + vlrDesc
-                                    + textoGCA + cifrao + vlrGCA 
-                                    + qntDeParc;
-                        };
-                        
-                        function textoParcComDesc(){
-                            texto = "Vlr Acordo.: ";
-                            cifrao = " R$ ";
-                            vlrAcordo = $scope.contrato.totalComDesconto;
-                            textoHon = " Hon.: ";                                                        
-                            vlrHon = $scope.contrato.vlrHon;
-                            textoJuros = " Juros.: ";
-                            textoDesc = " Desc.: ";
-                            vlrDesc = $scope.contrato.vlrDescJuros;
-                            vlrJuros = "";
-                            
-                            if($scope.contrato.qntParc == 1){
-                                vlrJuros = $scope.contrato.vlrJuroParc1 - (($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100);
-                            } else if($scope.contrato.qntParc == 2){
-                                
-                                somaJuro = $scope.contrato.vlrJuroParc1+ $scope.contrato.vlrJuroParc2;
-                                alert(somaJuro);
-                                alert($scope.contrato.vlrDescJuros);
-                                alert( (somaJuro * $scope.contrato.vlrDescJuros)/100);
-                                alert( (somaJuro * $scope.contrato.vlrDescJuros)/100);
-                                
-                                
-                                vlrJuros = somaJuro - ((( somaJuro  * $scope.contrato.vlrDescJuros) / 100));
-                            } else if($scope.contrato.qntParc == 3){
-                                
-                                somaJuro = $scope.contrato.vlrJuroParc1+ $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3;
-                                vlrJuros = somaJuro - ((somaJuro  * $scope.contrato.vlrDescJuros) / 100);}
-                            
-                            textoGCA = " GCA.: ";
-                            vlrGCA = $scope.contrato.vlrGCA;
-                            
-                            qntDeParc = "";
-                            
-                            if($scope.contrato.qntParc == 1){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
-                            } else if($scope.contrato.qntParc == 2){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
-                            } else if($scope.contrato.qntParc == 3){
-                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";}
-                            
-                            
-                            return texto + cifrao +  vlrAcordo 
-                                    + textoHon + cifrao + vlrHon 
-                                    + textoJuros + cifrao + vlrJuros  
-                                    + textoDesc + vlrDesc + "% "
-                                    + textoGCA + cifrao + vlrGCA 
-                                    + qntDeParc;
-                        };
-                        
-                        $scope.$watch('contrato.vlrParc', cpVlrParc);
-                        $scope.$watch('contrato.vlrHon', cpVlrHon);
-                        $scope.$watch('contrato.qntParc', cpQntParc);
-                    }
-                    ;
+                                            }
+                                        }
+                                        ;
 
-                    function cobCalc($scope) {
-                        // $scope.totalSemDesconto = "test";
-                    }
+                                        function parcComDesc() {
+                                            somaVlrEstaveis = (($scope.contrato.vlrParc * $scope.contrato.qntParc)
+                                                    + $scope.contrato.vlrHon)
+                                                    + $scope.contrato.vlrGCA;
+
+                                            if (parc == 1) {
+
+                                                juroComDesc = ($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100;
+                                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1) - juroComDesc;
+                                            } else if (parc == 2) {
+                                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) * $scope.contrato.vlrDescJuros) / 100;
+                                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2) - juroComDesc;
+                                            } else if (parc == 3) {
+                                                juroComDesc = (($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) * $scope.contrato.vlrDescJuros) / 100;
+                                                return (somaVlrEstaveis + $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3) - juroComDesc;
+
+                                            }
+                                            ;
+                                        }
+                                        ;
+
+                                        function textoParcSemDesc() {
+
+                                            cifrao = " R$ ";
+                                            texto = "Vlr Acordo " + cifrao + ".: ";
+
+                                            if ($scope.contrato.totalComDesconto == null) {
+                                                vlrAcordo = 0;
+                                            } else {
+                                                vlrAcordo = $scope.contrato.totalComDesconto;
+                                            }
+
+                                            textoHon = " Hon " + cifrao + ".: ";
+                                            vlrHon = $scope.contrato.vlrHon;
+                                            textoJuros = " Juros " + cifrao + ".: ";
+                                            textoDesc = " Desc " + cifrao + ".: ";
+                                            vlrDesc = " S/D";
+                                            vlrJuros = "";
+
+                                            if ($scope.contrato.qntParc == 1) {
+                                                vlrJuros = $scope.contrato.vlrJuroParc1;
+                                            } else if ($scope.contrato.qntParc == 2) {
+                                                vlrJuros = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
+                                            } else if ($scope.contrato.qntParc == 3) {
+                                                vlrJuros = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3;
+                                            }
+
+                                            textoGCA = " GCA " + cifrao + ".: ";
+                                            vlrGCA = $scope.contrato.vlrGCA;
+
+                                            qntDeParc = "";
+
+                                            if ($scope.contrato.qntParc == 1) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
+                                            } else if ($scope.contrato.qntParc == 2) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+                                            } else if ($scope.contrato.qntParc == 3) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+                                            }
+
+
+                                            return texto + vlrAcordo
+                                                    + textoHon + vlrHon
+                                                    + textoJuros + vlrJuros
+                                                    + textoDesc + vlrDesc
+                                                    + textoGCA + vlrGCA
+                                                    + qntDeParc;
+                                        }
+                                        ;
+
+                                        function textoParcComDesc() {
+                                            cifrao = " R$ ";
+                                            texto = "Vlr Acordo " + cifrao + ".: ";
+
+                                            if ($scope.contrato.totalComDesconto == null) {
+                                                vlrAcordo = 0;
+                                            } else {
+                                                vlrAcordo = $scope.contrato.totalComDesconto;
+                                            }
+                                            textoHon = " Hon " + cifrao + ".: ";
+                                            vlrHon = $scope.contrato.vlrHon;
+                                            textoJuros = " Juros " + cifrao + ".: ";
+                                            textoDesc = " Desc " + cifrao + ".: ";
+                                            vlrDesc = $scope.contrato.vlrDescJuros;
+                                            vlrJuros = "";
+
+                                            if ($scope.contrato.qntParc == 1) {
+                                                vlrJuros = $scope.contrato.vlrJuroParc1 - (($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100);
+                                            } else if ($scope.contrato.qntParc == 2) {
+
+                                                somaJuro = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
+                                                vlrJuros = somaJuro - (((somaJuro * $scope.contrato.vlrDescJuros) / 100));
+                                            } else if ($scope.contrato.qntParc == 3) {
+
+                                                somaJuro = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3;
+                                                vlrJuros = somaJuro - ((somaJuro * $scope.contrato.vlrDescJuros) / 100);
+                                            }
+
+                                            textoGCA = " GCA.: ";
+                                            vlrGCA = $scope.contrato.vlrGCA;
+
+                                            qntDeParc = "";
+
+                                            if ($scope.contrato.qntParc == 1) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
+                                            } else if ($scope.contrato.qntParc == 2) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+                                            } else if ($scope.contrato.qntParc == 3) {
+                                                qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+                                            }
+
+
+                                            return texto + cifrao + vlrAcordo
+                                                    + textoHon + cifrao + vlrHon
+                                                    + textoJuros + cifrao + vlrJuros
+                                                    + textoDesc + vlrDesc + "% "
+                                                    + textoGCA + cifrao + vlrGCA
+                                                    + qntDeParc;
+                                        }
+                                        ;
+
+                                        $scope.contrato.limparDados = function() {
+                                            $scope.contrato.vlrGCA = 200;
+                                        };
+
+                                        $scope.$watch('contrato.vlrParc', cpVlrParc);
+                                        $scope.$watch('contrato.vlrHon', cpVlrHon);
+                                        $scope.$watch('contrato.qntParc', cpQntParc);
+                                    }
+                                    ;
+
+                                    function cobCalc($scope) {
+                                        // $scope.totalSemDesconto = "test";
+                                    }
 
 
         </script>
