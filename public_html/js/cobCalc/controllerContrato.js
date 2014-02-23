@@ -25,7 +25,7 @@ function dadosContrato($scope) {
     };
 
 
-        
+
     $scope.reset = function() {
         $scope.contrato = {
             vlrTotalParc: 0,
@@ -40,7 +40,7 @@ function dadosContrato($scope) {
         };
         $scope.btSemDesc = false;
         $scope.btComDesc = false;
-        
+
     };
 
     /**
@@ -48,7 +48,9 @@ function dadosContrato($scope) {
      * @returns {undefined}
      */
     var cpVlrParc = function() {
-        $scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
+        //$scope.contrato.vlrHon = (($scope.contrato.vlrParc) * 10) / 100;
+        
+        $scope.contrato.vlrHon = calcularVlrHon();
 
         $scope.contrato.totalSemDesconto = parcSemDesc();
         $scope.contrato.totalComDesconto = parcComDesc();
@@ -64,12 +66,34 @@ function dadosContrato($scope) {
     };
 
     /**
+     * Metodo para calcular o valor dos honorarios
+     * @returns 
+     */
+    function calcularVlrHon(){
+        vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
+        
+
+        if ($scope.contrato.qntParc == 1) {              
+            vlrHonJuros = (($scope.contrato.vlrJuroParc1*10)/100);
+            return $scope.contrato.vlrHon = vlrHon + vlrHonJuros;
+        } else if ($scope.contrato.qntParc == 2) {
+            return vlrHon + (( ($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2)*10)/100);
+        } else if ($scope.contrato.qntParc == 3){
+            return vlrHon + (( ($scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3)*10)/100);
+        } else {            
+            return (($scope.contrato.vlrParc) * 10) / 100;
+        }
+    }
+    
+    /**
      * Metodo para controlar o evento no Select da "Quantidade de Parcelas"
      * @returns {undefined}
      */
     var cpQntParc = function() {
-        $scope.contrato.vlrHon = ((((($scope.contrato.vlrParc) * 10) / 100)) * $scope.contrato.qntParc);
-
+        
+        
+        $scope.contrato.vlrHon = calcularVlrHon();
+                        
         $scope.contrato.totalSemDesconto = parcSemDesc();
         $scope.contrato.totalComDesconto = parcComDesc();
 
@@ -183,11 +207,11 @@ function dadosContrato($scope) {
         if ($scope.contrato.totalComDesconto == null) {
             vlrAcordo = 0;
         } else {
-            vlrAcordo = $scope.contrato.totalComDesconto;
+            vlrAcordo = ($scope.contrato.totalComDesconto).toFixed(2);
         }
 
         textoHon = " Hon " + cifrao + ".: ";
-        vlrHon = $scope.contrato.vlrHon;
+        vlrHon = ($scope.contrato.vlrHon).toFixed(2);
         textoJuros = " Juros " + cifrao + ".: ";
         textoDesc = " Desc " + cifrao + ".: ";
         vlrDesc = " S/D";
@@ -202,16 +226,16 @@ function dadosContrato($scope) {
         }
 
         textoGCA = " GCA " + cifrao + ".: ";
-        vlrGCA = $scope.contrato.vlrGCA;
+        vlrGCA = ($scope.contrato.vlrGCA).toFixed(2);
 
         qntDeParc = "";
 
         if ($scope.contrato.qntParc == 1) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcela nº";
         } else if ($scope.contrato.qntParc == 2) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas nº";
         } else if ($scope.contrato.qntParc == 3) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas nº";
         }
 
 
@@ -235,51 +259,54 @@ function dadosContrato($scope) {
         if ($scope.contrato.totalComDesconto == null) {
             vlrAcordo = 0;
         } else {
-            vlrAcordo = $scope.contrato.totalComDesconto;
+            vlrAcordo = ($scope.contrato.totalComDesconto).toFixed(2);
         }
         textoHon = " Hon " + cifrao + ".: ";
-        vlrHon = $scope.contrato.vlrHon;
+        vlrHon = ($scope.contrato.vlrHon).toFixed(2);
         textoJuros = " Juros " + cifrao + ".: ";
         textoDesc = " Desc " + cifrao + ".: ";
-        vlrDesc = $scope.contrato.vlrDescJuros;
+        vlrDesc = ($scope.contrato.vlrDescJuros).toFixed(2);
         vlrJuros = "";
 
         if ($scope.contrato.qntParc == 1) {
             vlrJuros = $scope.contrato.vlrJuroParc1 - (($scope.contrato.vlrJuroParc1 * $scope.contrato.vlrDescJuros) / 100);
+            vlrJuros.toFixed(2)
         } else if ($scope.contrato.qntParc == 2) {
 
             somaJuro = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2;
             vlrJuros = somaJuro - (((somaJuro * $scope.contrato.vlrDescJuros) / 100));
+            vlrJuros.toFixed(2)
         } else if ($scope.contrato.qntParc == 3) {
 
             somaJuro = $scope.contrato.vlrJuroParc1 + $scope.contrato.vlrJuroParc2 + $scope.contrato.vlrJuroParc3;
             vlrJuros = somaJuro - ((somaJuro * $scope.contrato.vlrDescJuros) / 100);
+            vlrJuros.toFixed(2)
         }
 
         textoGCA = " GCA.: ";
-        vlrGCA = $scope.contrato.vlrGCA;
+        vlrGCA = ($scope.contrato.vlrGCA).toFixed(2);
 
         qntDeParc = "";
 
         if ($scope.contrato.qntParc == 1) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcela ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcela nº";
         } else if ($scope.contrato.qntParc == 2) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas nº";
         } else if ($scope.contrato.qntParc == 3) {
-            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas ";
+            qntDeParc = " " + $scope.contrato.qntParc + " Parcelas nº";
         }
 
 
-        return texto + cifrao + vlrAcordo
-                + textoHon + cifrao + vlrHon
-                + textoJuros + cifrao + vlrJuros
+        return texto + vlrAcordo
+                + textoHon + vlrHon
+                + textoJuros + vlrJuros
                 + textoDesc + vlrDesc + "% "
                 + textoGCA + cifrao + vlrGCA
                 + qntDeParc;
     }
     ;
 
-    
+
     $scope.$watch('contrato.vlrParc', cpVlrParc);
     $scope.$watch('contrato.vlrHon', cpVlrHon);
     $scope.$watch('contrato.qntParc', cpQntParc);

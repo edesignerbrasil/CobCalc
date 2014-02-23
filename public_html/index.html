@@ -137,8 +137,8 @@ and open the template in the editor.
                         <div class="form-inline">
                             <div class="row">
                                 <label for="inQntParc" 
-                                       class="col-xs-6 col-lg-2 col-md-2 col-sm-8 text-right">Qnt de Parc.:</label>            
-                                <div class="col-xs-3 col-lg-6 col-md-6 col-sm-2">
+                                       class="col-xs-6 col-lg-2 col-md-2 col-sm-6 text-right">Qnt de Parc.:</label>            
+                                <div class="col-xs-3 col-lg-6 col-md-6 col-sm-3">
                                     <select name="qntParcelas" id="inQntParc"
                                             class="form-control"
                                             ng-change="cpQntParc()" ng-model="contrato.qntParc">
@@ -151,31 +151,32 @@ and open the template in the editor.
                         </div>
                     </div><!--FIM Quantidade de Parcelas -->
 
+                    <div class="row totalComESemDesc">
+                        <p class="col-xs-offset-1 text-info">Sem Desconto.: <span class="text-success">{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
+                        <p class="col-xs-offset-1 text-info">Com Desconto.: <span class="text-warning">{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
+                    </div>
+                    
+                    <!--Botoes formulario -->
                     <div class="row">
                         <div class='form-inline'>                        
 
                             <a href="#" 
-                               class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1" 
+                               class="btn btn-primary col-xs-offset-1 col-xs-3 col-sm-2 col-md-2 col-lg-1" 
                                ng-click="btSemDesc= !semDesc">S/Desc</a>                                                                    
                             
                             <button 
-                                class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1 btn btn-primary" 
+                                class="btn btn-primary btn-danger col-xs-3 col-sm-2 col-md-2 col-lg-1 btn btn-primary" 
                                 ng-click="btComDesc = !comDesc">C/Desc</button>                                                                    
                             
                             <a href="#" id="limparDados" 
-                               class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-1 col-md-2 col-lg-1 col-lg-offset-1"
+                               class="btn btn-primary col-xs-offset-1 col-xs-3 col-sm-1 col-md-2 col-lg-1 col-lg-offset-1"
                                ng-click="reset()" >Limpar</a>                        
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <p class="col-xs-offset-1 text-info">Sem Desconto.: <span class="text-success">{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
-                        <p class="col-xs-offset-1 text-info">Com Desconto.: <span class="text-warning">{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
-                    </div>
-
+                    </div><!--FIM Botoes formulario -->
+                    
                     <!-- Texto do acordo sem desconto -->
                     
-                    <div class="row">
+                    <div class="row txtSemDesc">
                         <div class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-8 acordoSemDesc"
                               ng-show="btSemDesc">
                             <span class="text-success">Acordo sem Desconto.:</span>
