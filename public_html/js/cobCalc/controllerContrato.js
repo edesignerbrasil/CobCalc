@@ -9,6 +9,9 @@
  */
 function dadosContrato($scope) {
 
+    $scope.btSemDesc = false;
+    $scope.btComDesc = false;
+
     $scope.contrato = {
         vlrTotalParc: 0,
         vlrParc: 0,
@@ -21,6 +24,8 @@ function dadosContrato($scope) {
         vlrJuroParc3: 0
     };
 
+
+        
     $scope.reset = function() {
         $scope.contrato = {
             vlrTotalParc: 0,
@@ -33,6 +38,9 @@ function dadosContrato($scope) {
             vlrJuroParc2: 0,
             vlrJuroParc3: 0
         };
+        $scope.btSemDesc = false;
+        $scope.btComDesc = false;
+        
     };
 
     /**
@@ -271,13 +279,7 @@ function dadosContrato($scope) {
     }
     ;
 
-    /**
-     * Metodo para limpar dados do formulario
-     * @returns {undefined}
-     */
-    $scope.contrato.limparDados = function() {
-    };
-
+    
     $scope.$watch('contrato.vlrParc', cpVlrParc);
     $scope.$watch('contrato.vlrHon', cpVlrHon);
     $scope.$watch('contrato.qntParc', cpQntParc);
