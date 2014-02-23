@@ -1,0 +1,31 @@
+/*
+*/
+/* 
+    Created on : Feb 23, 2014, 2:34:45 PM
+    Author     : edesignerbrasil
+*/
+
+.acordoSemDesc{
+                border: solid 2px #245b18;
+
+            }
+
+            .acordoComDesc{
+                border: solid 2px #c40402;
+            }
+            
+            .acordoSemDesc span {
+                color: #144612;
+                font-style: italic;
+                margin-left: 5px;
+            }
+            
+            .acordoComDesc span {
+                font-style: italic;
+                margin-left: 5px;
+            }
+            
+            form{
+                margin-top: 3%;
+            }
+

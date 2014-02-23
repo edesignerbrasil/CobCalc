@@ -10,30 +10,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale-1" >
 
-        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap-theme.css"> 
-
-        <style type="text/css">
-            .acordoSemDesc{
-                border: solid 2px #245b18;
-
-            }
-
-            .acordoComDesc{
-                border: solid 2px #c40402;
-            }
-            
-            .acordoSemDesc span {
-                color: #144612;
-                font-style: italic;
-                margin-left: 5px;
-            }
-            
-            .acordoComDesc span {
-                font-style: italic;
-                margin-left: 5px;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.1.1/css/bootstrap-theme.css"/> 
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+                            
     </head>
     <body ng-controller="cobCalc" class="container">
         <div>
@@ -41,6 +21,7 @@ and open the template in the editor.
 
             <form ng-controller="dadosContrato" role="form" class="form-horizontal">
 
+                <!-- Valor da Parcela -->
                 <div class="form-group">
                     <div class="form-inline">
                         <div class="row">
@@ -54,9 +35,9 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- FIM Valor da Parcela -->
 
-
+                <!-- Valor dos Honorarios -->
                 <div class="form-group">
                     <div class="form-inline">
                         <div class="row">
@@ -69,11 +50,11 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- FIM Valor dos Honorarios -->
 
 
                 <div class="form-group">
-
+                    <!-- Valor dos Juros Parcela 1 -->
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -88,8 +69,9 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!--FIM Valor dos Juros Parcela 1 -->
 
+                    <!-- Valor dos Juros Parcela 2 -->
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -102,8 +84,9 @@ and open the template in the editor.
                                 </div>    
                             </div>
                         </div>
-                    </div>
+                    </div><!--FIM Valor dos Juros Parcela 1 -->
 
+                    <!-- Valor dos Juros Parcela 3 -->
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -117,7 +100,9 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
+                    <!-- Valor dos Juros Parcela 3 -->
 
+                    <!-- Valor percentual dos descontos -->
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -130,9 +115,9 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!--FIM Valor percentual dos descontos -->
 
-
+                    <!-- Valor GCA -->
                     <div class="form-group">
                         <div class="row">
                             <div class="form-inline">
@@ -145,8 +130,9 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!--FIM Valor GCA -->
 
+                    <!-- Quantidade de Parcelas -->
                     <div class="form-group">
                         <div class="form-inline">
                             <div class="row">
@@ -162,20 +148,23 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Tirado os botoes por nao estar interagindo com angularJS o metodo ng-click
+                    </div><!--FIM Quantidade de Parcelas -->
+                    
+                    
                                         <div class="row">
                                             <div class='form-inline'>                        
-                    <!--
+                    
                     <a href="#" class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1">Gerar Texto</a>                                                                    
                         
                         <button class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-1 btn btn-primary" ng-click="limparDados()" value="TTT">Gerar Texto</button>                                                                    
                     <a href="#" id="limparDados" 
                        class="btn btn-primary col-xs-offset-1 col-xs-4 col-sm-1 col-md-2 col-lg-1 col-lg-offset-1"
-                       ng-click="limparDados()" >Limpar</a                        
-                    </div>
-                </div>
-                    -->
+                       ng-click="reset()" >Limpar</a>                        
+                    
+                                            </div>
+                                        </div>
+                
+                    
                     <div class="row">
                         <p class="col-xs-offset-1 text-info">Sem Desconto.: <span class="text-success">{{contrato.totalSemDesconto| currency: "R$ " }}</span></p>
                         <p class="col-xs-offset-1 text-info">Com Desconto.: <span class="text-warning">{{contrato.totalComDesconto| currency: "R$ "}}</span></p>
